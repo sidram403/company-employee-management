@@ -77,7 +77,7 @@ const CompanyList: React.FC<CompanyListProps> = ({
         await axiosInstance.delete(`/companies/${companyId}`);
         setCompanies(companies.filter((c) => c._id !== companyId));
         if (selectedCompany && selectedCompany._id === companyId) {
-          setSelectedCompany(null);
+          // setSelectedCompany(null);
         }
       } catch (error) {
         console.error("Error deleting company:", error);

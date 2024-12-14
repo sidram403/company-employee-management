@@ -1,5 +1,4 @@
-import React, { createContext, useState, useContext, useEffect } from 'react';
-import axios from 'axios';
+import React, { createContext, useState, useContext, useEffect, PropsWithChildren } from 'react';
 import axiosInstance from '../utils/axiosInstance';
 
 interface User {
@@ -26,7 +25,7 @@ export const useAuth = () => {
   return context;
 };
 
-export const AuthProvider: React.FC = ({ children }) => {
+export const AuthProvider: React.FC<PropsWithChildren<{}>> = ({ children }) => {
   const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [user, setUser] = useState<User | null>(null);
   const [isLoading, setIsLoading] = useState(true);
@@ -51,9 +50,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const login = async (email: string, password: string) => {
     try {
-      const response = await axiosInstance.post('/auth/login', 
-        { email, password },
-      );
+      const response = await axiosInstance.post('/auth/login', { email, password });
       setUser(response.data.user);
       setIsAuthenticated(true);
       return true;
@@ -65,9 +62,7 @@ export const AuthProvider: React.FC = ({ children }) => {
 
   const signup = async (fullName: string, email: string, password: string) => {
     try {
-      const response = await axiosInstance.post('/auth/signup', 
-        { fullName, email, password },
-      );
+      const response = await axiosInstance.post('/auth/signup', { fullName, email, password });
       setUser(response.data.user);
       setIsAuthenticated(true);
       return true;
@@ -98,4 +93,3 @@ export const AuthProvider: React.FC = ({ children }) => {
     </AuthContext.Provider>
   );
 };
-
