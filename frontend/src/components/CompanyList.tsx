@@ -20,7 +20,6 @@ interface CompanyListProps {
 const CompanyList: React.FC<CompanyListProps> = ({
   companies,
   selectedCompany,
-  setSelectedCompany,
   setCompanies,
   isAdmin,
 }) => {
